@@ -6,7 +6,6 @@ function List({todos, setTodos, filter, checkFilter}) {
     const [updateTodoIndex, setUpdateTodoIndex] = useState(-1);
 
     useEffect(() => {
-
         setIsEachTodoCompleted(todos.every(todo => todo.isCompleted));
     }, [todos]);
 
@@ -29,8 +28,11 @@ function List({todos, setTodos, filter, checkFilter}) {
     };
 
     const handleOnBlur = (e, index) => {
-
         setUpdateTodoIndex(-1);
+
+        if (e.target.value === '')
+            return false;
+
         updateTodo({text: e.target.value}, index);
     };
 
@@ -45,7 +47,6 @@ function List({todos, setTodos, filter, checkFilter}) {
         newTodoList[index] = {...todo, ...newTodo};
         setTodos(newTodoList);
     };
-
 
     return (
         <div>

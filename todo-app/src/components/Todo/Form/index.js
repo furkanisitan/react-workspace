@@ -6,11 +6,12 @@ function Form({todos, setTodos}) {
 
     const [form, setForm] = useState(initialFormValues);
 
+    // reset form
     useEffect(() => {
         setForm(initialFormValues);
     }, [todos]);
 
-    const onChangeInput = (e) => {
+    const handleOnChangeInput = (e) => {
         setForm({...form, [e.target.name]: e.target.value});
     };
 
@@ -29,7 +30,7 @@ function Form({todos, setTodos}) {
             <input
                 name="text"
                 value={form.text}
-                onChange={onChangeInput}
+                onChange={handleOnChangeInput}
                 className="new-todo"
                 placeholder="What needs to be done?"
                 autoFocus
