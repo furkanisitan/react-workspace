@@ -29,6 +29,11 @@ function List({todos, setTodos, filter, checkFilter}) {
         setTodos(newTodoList);
     };
 
+    const removeTodo = (index) => {
+        const filteredTodos = todos.filter((todo, i) => i !== index);
+        setTodos(filteredTodos);
+    };
+
     return (
         <div>
             <section className="main">
@@ -53,7 +58,7 @@ function List({todos, setTodos, filter, checkFilter}) {
                                        checked={todo.isCompleted}
                                        onChange={() => handleToggleComplete(i)}/>
                                 <label>{todo.text}</label>
-                                <button className="destroy"/>
+                                <button className="destroy" onClick={() => removeTodo(i)}/>
                             </div>
                         </li>
                     ))}
