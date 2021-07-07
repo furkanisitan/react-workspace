@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 const initialTodos = [
     {text: 'Learn JavaScript', isCompleted: true},
@@ -9,6 +9,13 @@ const initialTodos = [
 function List() {
 
     const [todos, setTodos] = useState(initialTodos);
+    const [isEachTodoCompleted, setIsEachTodoCompleted] = useState(false);
+
+    useEffect(() => {
+
+        setIsEachTodoCompleted(todos.every(todo => todo.isCompleted));
+    }, [todos]);
+
 
     const handleToggleComplete = (index) => {
 
@@ -22,7 +29,9 @@ function List() {
     return (
         <div>
             <section className="main">
-                <input className="toggle-all" type="checkbox"/>
+                <input className="toggle-all"
+                       type="checkbox"
+                       checked={isEachTodoCompleted}/>
                 <label htmlFor="toggle-all">
                     Mark all as complete
                 </label>
@@ -32,7 +41,9 @@ function List() {
                     {todos.map((todo, i) => (
                         <li className={(todo.isCompleted ? 'completed' : '')} key={i}>
                             <div className="view">
-                                <input className="toggle" type="checkbox" defaultChecked={todo.isCompleted}
+                                <input className="toggle"
+                                       type="checkbox"
+                                       defaultChecked={todo.isCompleted}
                                        onChange={() => handleToggleComplete(i)}/>
                                 <label>{todo.text}</label>
                                 <button className="destroy"/>
