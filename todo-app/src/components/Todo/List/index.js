@@ -1,6 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
+
+const initialTodos = [
+    {text: 'Learn JavaScript', isCompleted: true},
+    {text: 'Learn React', isCompleted: false},
+    {text: 'Have a life!', isCompleted: false}
+];
 
 function List() {
+
+    const [todos, setTodos] = useState(initialTodos);
+
     return (
         <div>
             <section className="main">
@@ -10,27 +19,16 @@ function List() {
                 </label>
 
                 <ul className="todo-list">
-                    <li className="completed">
-                        <div className="view">
-                            <input className="toggle" type="checkbox"/>
-                            <label>Learn JavaScript</label>
-                            <button className="destroy"/>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="view">
-                            <input className="toggle" type="checkbox"/>
-                            <label>Learn React</label>
-                            <button className="destroy"/>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="view">
-                            <input className="toggle" type="checkbox"/>
-                            <label>Have a life!</label>
-                            <button className="destroy"/>
-                        </div>
-                    </li>
+
+                    {todos.map((todo, i) => (
+                        <li className={(todo.isCompleted && 'completed')}>
+                            <div className="view">
+                                <input className="toggle" type="checkbox" defaultChecked={todo.isCompleted}/>
+                                <label>{todo.text}</label>
+                                <button className="destroy"/>
+                            </div>
+                        </li>
+                    ))}
                 </ul>
             </section>
         </div>
