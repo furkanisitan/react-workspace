@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
-function List({todos, setTodos}) {
+
+function List({todos, setTodos, filter, checkFilter}) {
 
     const [isEachTodoCompleted, setIsEachTodoCompleted] = useState(false);
 
@@ -42,6 +43,9 @@ function List({todos, setTodos}) {
                 <ul className="todo-list">
 
                     {todos.map((todo, i) => (
+
+                        checkFilter(filter, todo)
+                        &&
                         <li className={(todo.isCompleted ? 'completed' : '')} key={i}>
                             <div className="view">
                                 <input className="toggle"

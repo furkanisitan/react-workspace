@@ -1,24 +1,38 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 
-function Footer() {
+function Footer({filter, setFilter, uncompletedTodoCount}) {
+
+    const handleOnClickFilter = (filter) => {
+        setFilter(filter);
+    };
+
     return (
         <footer className="footer">
 
             <span className="todo-count">
-                <strong>2</strong>
-                items left
+                <strong>{uncompletedTodoCount} </strong>
+                 items left
             </span>
 
             <ul className="filters">
                 <li>
-                    <a className="selected">All</a>
+                    <a className={filter === 'all' ? 'selected' : ''}
+                       onClick={() => handleOnClickFilter('all')}>
+                        All
+                    </a>
                 </li>
                 <li>
-                    <a>Active</a>
+                    <a className={filter === 'active' ? 'selected' : ''}
+                       onClick={() => handleOnClickFilter('active')}>
+                        Active
+                    </a>
                 </li>
                 <li>
-                    <a>Completed</a>
+                    <a className={filter === 'completed' ? 'selected' : ''}
+                       onClick={() => handleOnClickFilter('completed')}>
+                        Completed
+                    </a>
                 </li>
             </ul>
 

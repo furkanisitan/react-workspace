@@ -9,10 +9,28 @@ const initialTodos = [
     {text: 'Have a life!', isCompleted: false}
 ];
 
+const checkFilter = (filter, item) => {
+
+    switch (filter) {
+        case 'all':
+            return true;
+        case 'active':
+            return !item.isCompleted;
+        case 'completed':
+            return item.isCompleted;
+        default:
+            return false;
+    }
+};
+
+const getUncompletedTodoCount = (todos) => {
+    return todos.filter(todo => !todo.isCompleted).length;
+};
+
 function Todo() {
 
     const [todos, setTodos] = useState(initialTodos);
-
+    const [filter, setFilter] = useState('all');
 
     return (
         <section className="todoapp">
@@ -22,9 +40,9 @@ function Todo() {
                 <Form/>
             </header>
 
-            <List todos={todos} setTodos={setTodos}/>
+            <List todos={todos} setTodos={setTodos} filter={filter} checkFilter={checkFilter}/>
 
-            <Footer/>
+            <Footer filter={filter} setFilter={setFilter} uncompletedTodoCount={getUncompletedTodoCount(todos)}/>
 
         </section>
     );
