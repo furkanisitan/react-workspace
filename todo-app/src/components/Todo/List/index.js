@@ -1,21 +1,13 @@
 import React, {useEffect, useState} from 'react';
 
-const initialTodos = [
-    {text: 'Learn JavaScript', isCompleted: true},
-    {text: 'Learn React', isCompleted: false},
-    {text: 'Have a life!', isCompleted: false}
-];
+function List({todos, setTodos}) {
 
-function List() {
-
-    const [todos, setTodos] = useState(initialTodos);
     const [isEachTodoCompleted, setIsEachTodoCompleted] = useState(false);
 
     useEffect(() => {
 
         setIsEachTodoCompleted(todos.every(todo => todo.isCompleted));
     }, [todos]);
-
 
     const handleToggleComplete = (index) => {
 
