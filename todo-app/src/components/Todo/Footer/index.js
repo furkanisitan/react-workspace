@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 
-function Footer({filter, setFilter, uncompletedTodoCount}) {
+function Footer({filter, setFilter, uncompletedTodoCount, clearCompletedTodos}) {
 
     const handleOnClickFilter = (filter) => {
         setFilter(filter);
@@ -36,7 +36,7 @@ function Footer({filter, setFilter, uncompletedTodoCount}) {
                 </li>
             </ul>
 
-            <button className="clear-completed">
+            <button className="clear-completed" onClick={clearCompletedTodos}>
                 Clear completed
             </button>
         </footer>

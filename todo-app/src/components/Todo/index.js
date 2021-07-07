@@ -32,6 +32,11 @@ function Todo() {
     const [todos, setTodos] = useState(initialTodos);
     const [filter, setFilter] = useState('all');
 
+    const removeAllCompletedTodos = () => {
+        const filteredTodos = todos.filter(todo => !todo.isCompleted);
+        setTodos(filteredTodos);
+    };
+
     return (
         <section className="todoapp">
 
@@ -42,7 +47,12 @@ function Todo() {
 
             <List todos={todos} setTodos={setTodos} filter={filter} checkFilter={checkFilter}/>
 
-            <Footer filter={filter} setFilter={setFilter} uncompletedTodoCount={getUncompletedTodoCount(todos)}/>
+            <Footer
+                filter={filter}
+                setFilter={setFilter}
+                uncompletedTodoCount={getUncompletedTodoCount(todos)}
+                clearCompletedTodos={removeAllCompletedTodos}
+            />
 
         </section>
     );
