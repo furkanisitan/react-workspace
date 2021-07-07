@@ -26,13 +26,24 @@ function List() {
         setTodos(newTodoList);
     };
 
+    const handleToggleAllComplete = () => {
+
+        const newTodoList = todos.map(todo => {
+            todo.isCompleted = !isEachTodoCompleted;
+            return todo;
+        });
+
+        setTodos(newTodoList);
+    };
+
     return (
         <div>
             <section className="main">
                 <input className="toggle-all"
                        type="checkbox"
-                       checked={isEachTodoCompleted}/>
-                <label htmlFor="toggle-all">
+                       checked={isEachTodoCompleted}
+                       onChange={handleToggleAllComplete}/>
+                <label htmlFor="toggle-all" onClick={handleToggleAllComplete}>
                     Mark all as complete
                 </label>
 
@@ -43,7 +54,7 @@ function List() {
                             <div className="view">
                                 <input className="toggle"
                                        type="checkbox"
-                                       defaultChecked={todo.isCompleted}
+                                       checked={todo.isCompleted}
                                        onChange={() => handleToggleComplete(i)}/>
                                 <label>{todo.text}</label>
                                 <button className="destroy"/>
