@@ -1,9 +1,39 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
-function Form() {
+const initialFormValues = {text: '', isCompleted: false};
+
+function Form({todos, setTodos}) {
+
+    const [form, setForm] = useState(initialFormValues);
+
+    useEffect(() => {
+        setForm(initialFormValues);
+    }, [todos]);
+
+    const onChangeInput = (e) => {
+        setForm({...form, [e.target.name]: e.target.value});
+    };
+
+    const handleOnSubmit = (e) => {
+        e.preventDefault();
+
+        if (form.text === '') {
+            return false;
+        }
+
+        setTodos([...todos, form]);
+    };
+
     return (
-        <form>
-            <input className="new-todo" placeholder="What needs to be done?" autoFocus/>
+        <form onSubmit={handleOnSubmit}>
+            <input
+                name="text"
+                value={form.text}
+                onChange={onChangeInput}
+                className="new-todo"
+                placeholder="What needs to be done?"
+                autoFocus
+            />
         </form>
     );
 }

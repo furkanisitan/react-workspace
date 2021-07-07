@@ -42,7 +42,7 @@ function Todo() {
 
             <header className="header">
                 <h1>todos</h1>
-                <Form/>
+                <Form todos={todos} setTodos={setTodos}/>
             </header>
 
             <List todos={todos} setTodos={setTodos} filter={filter} checkFilter={checkFilter}/>
