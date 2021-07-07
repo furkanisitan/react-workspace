@@ -10,6 +10,15 @@ function List() {
 
     const [todos, setTodos] = useState(initialTodos);
 
+    const handleToggleComplete = (index) => {
+
+        let newTodoList = [...todos];
+        let todo = newTodoList[index];
+        newTodoList[index] = {...todo, isCompleted: !todo.isCompleted};
+
+        setTodos(newTodoList);
+    };
+
     return (
         <div>
             <section className="main">
@@ -21,9 +30,10 @@ function List() {
                 <ul className="todo-list">
 
                     {todos.map((todo, i) => (
-                        <li className={(todo.isCompleted && 'completed')}>
+                        <li className={(todo.isCompleted ? 'completed' : '')} key={i}>
                             <div className="view">
-                                <input className="toggle" type="checkbox" defaultChecked={todo.isCompleted}/>
+                                <input className="toggle" type="checkbox" defaultChecked={todo.isCompleted}
+                                       onChange={() => handleToggleComplete(i)}/>
                                 <label>{todo.text}</label>
                                 <button className="destroy"/>
                             </div>
