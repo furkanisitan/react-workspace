@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 
-
 function List({todos, setTodos, filter, checkFilter}) {
 
     const [isEachTodoCompleted, setIsEachTodoCompleted] = useState(false);
+    const [updateTodoIndex, setUpdateTodoIndex] = useState(-1);
 
     useEffect(() => {
 
@@ -11,12 +11,7 @@ function List({todos, setTodos, filter, checkFilter}) {
     }, [todos]);
 
     const handleToggleComplete = (index) => {
-
-        let newTodoList = [...todos];
-        let todo = newTodoList[index];
-        newTodoList[index] = {...todo, isCompleted: !todo.isCompleted};
-
-        setTodos(newTodoList);
+        updateTodo({isCompleted: !todos[index].isCompleted}, index);
     };
 
     const handleToggleAllComplete = () => {
@@ -29,10 +24,28 @@ function List({todos, setTodos, filter, checkFilter}) {
         setTodos(newTodoList);
     };
 
+    const handleUpdateTodoIndex = (index) => {
+        setUpdateTodoIndex(index);
+    };
+
+    const handleOnBlur = (e, index) => {
+
+        setUpdateTodoIndex(-1);
+        updateTodo({text: e.target.value}, index);
+    };
+
     const removeTodo = (index) => {
         const filteredTodos = todos.filter((todo, i) => i !== index);
         setTodos(filteredTodos);
     };
+
+    const updateTodo = (newTodo, index) => {
+        let newTodoList = [...todos];
+        let todo = newTodoList[index];
+        newTodoList[index] = {...todo, ...newTodo};
+        setTodos(newTodoList);
+    };
+
 
     return (
         <div>
@@ -57,8 +70,22 @@ function List({todos, setTodos, filter, checkFilter}) {
                                        type="checkbox"
                                        checked={todo.isCompleted}
                                        onChange={() => handleToggleComplete(i)}/>
-                                <label>{todo.text}</label>
-                                <button className="destroy" onClick={() => removeTodo(i)}/>
+
+                                {
+                                    updateTodoIndex === i ?
+                                        <input
+                                            defaultValue={todo.text}
+                                            className="mv-editor"
+                                            autoFocus={true}
+                                            onBlur={(e) => handleOnBlur(e, i)}
+                                        />
+                                        :
+                                        <>
+                                            <label onClick={() => handleUpdateTodoIndex(i)}>{todo.text}</label>
+                                            <button className="destroy" onClick={() => removeTodo(i)}/>
+                                        </>
+                                }
+
                             </div>
                         </li>
                     ))}

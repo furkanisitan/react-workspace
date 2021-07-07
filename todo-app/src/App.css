@@ -62,12 +62,6 @@ body {
     color: #e6e6e6;
 }
 
-.todoapp input::input-placeholder {
-    font-style: italic;
-    font-weight: 300;
-    color: #e6e6e6;
-}
-
 .todoapp h1 {
     position: absolute;
     top: -155px;
@@ -379,45 +373,16 @@ html .clear-completed:active {
     }
 }
 
-/* Mavo */
-
-[property]:hover,
-[mv-app] [mv-mode="edit"] .mv-editor {
+.mv-editor:hover {
     box-shadow: none !important;
 }
 
-[mv-app] [mv-mode="edit"] .mv-editor {
-    width: 100% !important;
-}
-
-[property="todo"]:focus-within {
-    border-bottom: 0;
-}
-
-[property="todo"] label:focus-within {
-    padding: 0;
-    margin: 0;
-    background-image: none !important;
-}
-
-[property="todo"].completed label:focus-within {
-    color: #4d4d4d;
-    text-decoration: none;
-}
-
-[mv-app] [mv-mode="edit"] .mv-editor:focus {
+.mv-editor {
     width: calc(100% - 78px) !important;
+    height: 34px !important;
     padding: 14px 16px !important;
     margin: 0 0 0 43px !important;
     border: 1px solid #999 !important;
     box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2) !important;
-}
-
-.mv-item-bar,
-.mv-ui.mv-message,
-button.mv-add,
-meta,
-[property="todo"] .view:focus-within .toggle,
-[property="todo"] .view:focus-within button {
-    display: none !important;
+    font-size: 22px !important;
 }
