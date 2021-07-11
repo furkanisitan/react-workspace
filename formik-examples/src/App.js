@@ -1,5 +1,5 @@
+import SemanticRegisterForm from 'components/User/SemanticRegisterForm';
 import {Link, Route, Switch} from 'react-router-dom';
-import SemanticRegisterForm from './components/User/SemanticRegisterForm';
 import './App.css';
 
 function App() {
