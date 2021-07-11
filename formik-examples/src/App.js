@@ -1,25 +1,23 @@
-import logo from './logo.svg';
+import {Link, Route, Switch} from 'react-router-dom';
+import SemanticRegisterForm from './components/User/SemanticRegisterForm';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div>
+            <nav>
+                <ul>
+                    <li>
+                        <Link to="/">SemanticRegisterForm</Link>
+                    </li>
+                </ul>
+            </nav>
+
+            <Switch>
+                <Route path={['/', '/semantic-register-form']} component={SemanticRegisterForm}/>
+            </Switch>
+        </div>
+    );
 }
 
 export default App;
