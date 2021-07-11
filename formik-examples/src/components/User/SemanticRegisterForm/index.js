@@ -1,25 +1,15 @@
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
+import initialValues from './initial-values';
 import validationSchema from './validation-schema';
-
-const formInitialValues = {
-    fullName: '',
-    email: '',
-    password: '',
-    rePassword: '',
-    gender: 'male',
-    city: '',
-    dateOfBirth: '',
-    isAgreed: false
-};
 
 function SemanticRegisterForm() {
     return (
         <div>
             <h1>Register</h1>
             <Formik
-                initialValues={formInitialValues}
+                initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={(values) => {
                     console.log(JSON.stringify(values));
