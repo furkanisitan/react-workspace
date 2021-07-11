@@ -1,7 +1,7 @@
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import validations from './validations';
+import validationSchema from './validation-schema';
 
 const formInitialValues = {
     fullName: '',
@@ -20,7 +20,7 @@ function SemanticRegisterForm() {
             <h1>Register</h1>
             <Formik
                 initialValues={formInitialValues}
-                validationSchema={validations}
+                validationSchema={validationSchema}
                 onSubmit={(values) => {
                     console.log(JSON.stringify(values));
                 }}
