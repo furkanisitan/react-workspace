@@ -16,7 +16,7 @@ function FormikSemanticRadio({isLast, ...props}) {
 
     const hasError = () =>
         meta.touched && meta.error;
-    
+
     return (
         <FormRadio
             {...field}
