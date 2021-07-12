@@ -3,7 +3,7 @@ const initialValues = {
     email: '',
     password: '',
     rePassword: '',
-    gender: 'male',
+    gender: '',
     city: '',
     dateOfBirth: '',
     isAgreed: false
