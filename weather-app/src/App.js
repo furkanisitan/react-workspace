@@ -1,7 +1,8 @@
 import Weather from 'components/Weather';
+import {AppProvider} from 'context/AppContext';
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import {Card, Container, Dropdown, Segment} from 'semantic-ui-react';
+import {Container, Dropdown} from 'semantic-ui-react';
 import './App.css';
 
 const cityOptions = [
@@ -12,17 +13,19 @@ const cityOptions = [
 
 function App() {
     return (
-        <Container className="app">
+        <AppProvider>
+            <Container className="app">
 
-            <h2>Wheather App</h2>
+                <h2>Wheather App</h2>
 
-            <div className="city-dropdown">
-                <Dropdown placeholder="Şehir Seçin" search selection options={cityOptions}/>
-            </div>
+                <div className="city-dropdown">
+                    <Dropdown placeholder="Şehir Seçin" search selection options={cityOptions}/>
+                </div>
 
-            <Weather/>
+                <Weather/>
 
-        </Container>
+            </Container>
+        </AppProvider>
     );
 }
 
