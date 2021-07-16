@@ -5,7 +5,7 @@ const getCities = () => {
     return cities.map(city => ({key: city.id, value: city.name, text: city.name}));
 };
 
-const AppContext = createContext();
+const AppContext = createContext({});
 
 export const AppProvider = ({children}) => {
 

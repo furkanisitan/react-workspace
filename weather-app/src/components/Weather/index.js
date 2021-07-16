@@ -1,32 +1,49 @@
 import WeatherCard from 'components/WeatherCard';
 import {useApp} from 'context/AppContext';
-import React, {useEffect} from 'react';
-import {Card} from 'semantic-ui-react';
+import React, {useEffect, useState} from 'react';
+import {Card, Loader} from 'semantic-ui-react';
+import CityService from 'services/city';
+import OpenWeatherMapApiService from 'services/open-weather-map-api';
 
-const weathers = [
-    {day: 'Pzt', icon: '01d', min: 22, max: 34},
-    {day: 'Sa', icon: '02d', min: 25, max: 45},
-    {day: 'Çar', icon: '03d', min: 18, max: 23},
-    {day: 'Per', icon: '09d', min: 14, max: 24},
-    {day: 'Cum', icon: '11d', min: 19, max: 28},
-    {day: 'Cmt', icon: '10d', min: 33, max: 55},
-    {day: 'Paz', icon: '04d', min: 10, max: 16}
-];
+const cityService = new CityService();
+const openWeatherMapApiService = new OpenWeatherMapApiService();
 
 function Weather() {
 
     const {city} = useApp();
+    const [weathers, setWeathers] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        console.log(city);
+
+        const cityObj = cityService.getByName(city);
+
+        if (cityObj) {
+            openWeatherMapApiService.oneCall(cityObj.latitude, cityObj.longitude).then(res => {
+                setWeathers(res.daily.map(d => {
+                    return {
+                        day: new Date(d.dt * 1000).toLocaleDateString('tr-TR', {weekday: 'short'}),
+                        max: Math.round(d.temp.max),
+                        min: Math.round(d.temp.min),
+                        icon: d.weather[0].icon
+                    };
+                }));
+            }).finally(() => setIsLoading(false));
+        }
     }, [city]);
 
     return (
-        <Card.Group itemsPerRow={weathers.length}>
+        <Card.Group itemsPerRow={weathers.length || 1}>
 
-            {weathers.map((value, index) =>
-                <WeatherCard key={index} {...value}/>
-            )}
+            {isLoading ?
+                <Loader active inline="centered"/>
+                :
+                <>
+                    {weathers.map((value, index) =>
+                        <WeatherCard key={index} {...value} isFirst={index === 0}/>
+                    )}
+                </>
+            }
         </Card.Group>
     );
 }
