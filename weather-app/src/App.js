@@ -1,31 +1,38 @@
 import Weather from 'components/Weather';
-import {AppProvider} from 'context/AppContext';
+import {useApp} from 'context/AppContext';
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import {Container, Dropdown} from 'semantic-ui-react';
 import './App.css';
 
-const cityOptions = [
-    {key: 1, value: 'Adana', text: 'Adana'},
-    {key: 2, value: 'Adıyaman', text: 'Adıyaman'},
-    {key: 3, value: 'Afyonkarahisar', text: 'Afyonkarahisar'}
-];
 
 function App() {
+
+    const {city, setCity, cityOptions} = useApp();
+
+    const handleChange = (e, { value }) => {
+        setCity(value)
+    };
+
     return (
-        <AppProvider>
-            <Container className="app">
+        <Container className="app">
 
-                <h2>Wheather App</h2>
+            <h2>Wheather App</h2>
 
-                <div className="city-dropdown">
-                    <Dropdown placeholder="Şehir Seçin" search selection options={cityOptions}/>
-                </div>
+            <div className="city-dropdown">
+                <Dropdown
+                    placeholder="Şehir Seçin"
+                    search
+                    selection
+                    options={cityOptions}
+                    value={city}
+                    onChange={handleChange}
+                />
+            </div>
 
-                <Weather/>
+            <Weather/>
 
-            </Container>
-        </AppProvider>
+        </Container>
     );
 }
 
