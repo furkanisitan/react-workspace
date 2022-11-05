@@ -1,0 +1,12 @@
+.user-page {
+    display: flex;
+    width: 800px;
+    margin: 0 auto;
+}
+
+
+.user-page > div {
+    flex: 1;
+    border: solid 1px #ccc;
+    padding: 10px;
+}

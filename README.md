@@ -41,3 +41,10 @@
 
 - [State Hook](https://reactjs.org/docs/hooks-state.html) (PrevState)
 - [Effect Hook](https://reactjs.org/docs/hooks-effect.html) (DidMount, Unmount)
+
+#### data-fetching
+
+- [Fetch API](https://javascript.info/fetch-api)
+- [Async/Await](https://javascript.info/async-await)
+- [Promise Error Handling](https://javascript.info/promise-error-handling)
+- [Async/Await Error Handling](https://javascript.info/async-await#error-handling)
